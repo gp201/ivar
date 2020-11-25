@@ -75,7 +75,7 @@ char* ref_antd::get_codon(int64_t pos, std::string region, gff3_feature feature,
 }
 
 int ref_antd::get_codon_num(int64_t pos, gff3_feature feature){
-  int64_t codon_num;
+  int codon_num;
   int64_t edit_pos = feature.get_edit_position(), codon_start_pos;
   std::string edit_sequence = feature.get_edit_sequence();
   int64_t edit_sequence_size = edit_sequence.size();
@@ -126,12 +126,12 @@ ref_antd::~ref_antd()
 int ref_antd::codon_aa_stream(std::string region, std::ostringstream &line_stream, std::ofstream &fout, int64_t pos, char alt){
   std::vector<gff3_feature> features = gff.query_features(pos, "CDS");
   if(features.size() == 0){	// No matching CDS
-    fout << line_stream.str() << "NA\tNA\tNA\tNA\tNA" << std::endl;
+    fout << line_stream.str() << "NA\tNA\tNA\tNA\tNA\tNA" << std::endl;
     return 0;
   }
   std::vector<gff3_feature>::iterator it;
   char *ref_codon, *alt_codon;
-  int64_t codon_num;
+  int codon_num;
   for(it = features.begin(); it != features.end(); it++){
     fout << line_stream.str();
     fout << it->get_attribute("ID") << "\t";

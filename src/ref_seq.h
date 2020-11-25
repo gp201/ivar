@@ -19,10 +19,10 @@ public:
   char get_base(int64_t pos, std::string region);
   int add_gff(std::string path);
   int add_seq(std::string path);
-  int get_codon_num(int64_t pos, gff3_feature feature);
   int codon_aa_stream(std::string region, std::ostringstream &line_stream, std::ofstream &fout, int64_t pos, char alt);
   char* get_codon(int64_t pos, std::string region, gff3_feature feature);
   char* get_codon(int64_t pos, std::string region, gff3_feature feature, char alt);
+  int get_codon_num(int64_t pos, gff3_feature feature);
   std::vector<gff3_feature> get_gff_features();
 
 private:

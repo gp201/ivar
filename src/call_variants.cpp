@@ -45,9 +45,9 @@ int call_variants_from_plup(std::istream &cin, std::string out_file, uint8_t min
     "\tGFF_FEATURE"
     "\tREF_CODON"
     "\tREF_AA"
+    "\tCODON_NUM"
     "\tALT_CODON"
     "\tALT_AA"
-    "\tCODON_NUM"
        << std::endl;
   int ctr = 0;
   int64_t pos = 0;
