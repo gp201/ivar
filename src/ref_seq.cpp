@@ -74,6 +74,20 @@ char* ref_antd::get_codon(int64_t pos, std::string region, gff3_feature feature,
   return codon;
 }
 
+int ref_antd::get_codon_num(int64_t pos, gff3_feature feature){
+  int64_t codon_num;
+  int64_t edit_pos = feature.get_edit_position(), codon_start_pos;
+  std::string edit_sequence = feature.get_edit_sequence();
+  int64_t edit_sequence_size = edit_sequence.size();
+  int64_t edit_offset = 0;
+  if(pos > edit_pos + edit_sequence_size && edit_pos != -1){
+    edit_offset = (pos - edit_pos) > edit_sequence_size ? edit_sequence_size : (pos - edit_pos); // Account for edits in position of insertion
+  }
+  codon_start_pos = (feature.get_start() - 1) + feature.get_phase() + (((pos + edit_offset - (feature.get_start() + feature.get_phase())))/3)*3;
+  codon_num = (codon_start_pos - feature.get_start())/3;
+  return codon_num;
+}
+
 int ref_antd::add_gff(std::string path){
   // Read GFF file
   if(!path.empty())
@@ -117,12 +131,15 @@ int ref_antd::codon_aa_stream(std::string region, std::ostringstream &line_strea
   }
   std::vector<gff3_feature>::iterator it;
   char *ref_codon, *alt_codon;
+  int64_t codon_num;
   for(it = features.begin(); it != features.end(); it++){
     fout << line_stream.str();
     fout << it->get_attribute("ID") << "\t";
     ref_codon = this->get_codon(pos, region, *it);
     fout << ref_codon[0] << ref_codon[1] << ref_codon[2] << "\t";
     fout << codon2aa(ref_codon[0], ref_codon[1], ref_codon[2]) << "\t";
+    codon_num = this->get_codon_num(pos, *it);
+    fout << codon_num << "\t";
     alt_codon = this->get_codon(pos, region, *it, alt);
     fout << alt_codon[0] << alt_codon[1] << alt_codon[2] << "\t";
     fout << codon2aa(alt_codon[0], alt_codon[1], alt_codon[2]);
