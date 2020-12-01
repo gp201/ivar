@@ -74,8 +74,9 @@ char* ref_antd::get_codon(int64_t pos, std::string region, gff3_feature feature,
   return codon;
 }
 
-int ref_antd::get_codon_num(int64_t pos, gff3_feature feature){
-  int codon_num;
+// Compute codon number based on position and GFF feature
+int64_t ref_antd::get_codon_num(int64_t pos, gff3_feature feature){
+  int64_t codon_num;
   int64_t edit_pos = feature.get_edit_position(), codon_start_pos;
   std::string edit_sequence = feature.get_edit_sequence();
   int64_t edit_sequence_size = edit_sequence.size();
@@ -131,7 +132,7 @@ int ref_antd::codon_aa_stream(std::string region, std::ostringstream &line_strea
   }
   std::vector<gff3_feature>::iterator it;
   char *ref_codon, *alt_codon;
-  int codon_num;
+  int64_t codon_num;
   for(it = features.begin(); it != features.end(); it++){
     fout << line_stream.str();
     fout << it->get_attribute("ID") << "\t";

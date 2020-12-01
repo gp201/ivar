@@ -18,10 +18,11 @@ const std::string fields[NUM_FIELDS] = {"REGION",
 			      "GFF_FEATURE",
 			      "REF_CODON",
 			      "REF_AA",
+            "CODON_NUM"
 			      "ALT_CODON",
 			      "ALT_AA"};
 
-const std::string na_tab_delimited_str = "NA\tNA\tNA\tNA\tNA\tNA\tNA\tNA\tNA\tNA";
+const std::string na_tab_delimited_str = "NA\tNA\tNA\tNA\tNA\tNA\tNA\tNA\tNA\tNA\tNA";
 
 int read_variant_file(std::ifstream &fin, unsigned int file_number, std::map<std::string, unsigned int> &counts, std::map<std::string, std::string> &file_tab_delimited_str){
   unsigned int ctr;
@@ -53,8 +54,9 @@ int read_variant_file(std::ifstream &fin, unsigned int file_number, std::map<std
       case 14:			// GFF_FEATURE
       case 15:			// REF_CODON
       case 16:			// REF_AA
-      case 17:			// ALT_CODON
-      case 18:			// ALT_AA
+      case 17:      // CODON_NUM
+      case 18:			// ALT_CODON
+      case 19:			// ALT_AA
 	tab_delimited_key += cell + "\t";
 	break;
       case 4:
@@ -107,7 +109,7 @@ int common_variants(std::string out, double min_threshold, char* files[], unsign
   for (i = 0; i < 4; ++i) {
     fout << fields[i] << "\t";
   }
-  for (i = 14; i < 19; ++i) {
+  for (i = 14; i < 20; ++i) {
     fout << fields[i] << "\t";
   }
   for (i = 0; i < nfiles; ++i) {
