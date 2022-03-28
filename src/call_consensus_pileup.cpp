@@ -133,14 +133,15 @@ ret_t get_consensus_allele(std::vector<allele> ad, uint8_t min_qual, double thre
    }    
     else
       gap_depth = 0;			  // For first position of allele
+
     //if we have multiple insertions in a row, we handle it differently
-    if(max_l > 1 && n!='*' && max_depth >= insert_gap_depth){
+    if(max_l > 2 && n!='*' && max_depth >= insert_gap_depth){
       t.nuc += n;
       q += 0.5;			// For rounding before converting to int
       t.q += (((uint8_t)q)+33);
  
     }    
-    else if(max_l <= 1 && n!='*' && max_depth >= gap_depth){ // TODO: Check what to do when equal.
+    else if(max_l <= 2 && n!='*' && max_depth >= gap_depth){ // TODO: Check what to do when equal.
       t.nuc += n;
       q += 0.5;			// For rounding before converting to int
       t.q += (((uint8_t)q)+33);
