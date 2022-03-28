@@ -40,22 +40,22 @@ int main() {
     ad.at(i) = arr[i];
   }
 
-  s = get_consensus_allele(ad,20,.8, 'N', 0);
+  s = get_consensus_allele(ad,20,.8, 'N', 0, 0);
   std::cout << s.nuc << ": " << s.q << std::endl;
   success += (s.nuc.compare("TN") == 0) ? 1: 0;
   success += (s.q.compare("??") == 0) ? 1 : 0;
 
-  s = get_consensus_allele(ad,20,.8, 'N', 1);
+  s = get_consensus_allele(ad,20,.8, 'N', 1, 1);
   std::cout << s.nuc << ": " << s.q << std::endl; 
   success += (s.nuc.compare("T") == 0) ? 1: 0;
   success += (s.q.compare("?") == 0) ? 1 : 0;
  
-  s = get_consensus_allele(ad,20,.8, 'N',.6);
+  s = get_consensus_allele(ad,20,.8, 'N',.6, 0.6);
   std::cout << s.nuc << ": " << s.q << std::endl;
   success += (s.nuc.compare("TN") == 0) ? 1: 0;
   success += (s.q.compare("??") == 0) ? 1 : 0;
   
-  s = get_consensus_allele(ad,20,.8, 'N',.8);
+  s = get_consensus_allele(ad,20,.8, 'N',.8, 0.8);
   std::cout << s.nuc << ": " << s.q << std::endl;
   success += (s.nuc.compare("T") == 0) ? 1: 0;
   success += (s.q.compare("?") == 0) ? 1 : 0;
