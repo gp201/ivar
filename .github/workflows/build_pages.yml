@@ -22,7 +22,7 @@ jobs:
                   cmake -G "Unix Makefiles" ..
                   make
                   sudo make install
-                  cd ivar
+                  cd ../../ivar
                   ls
                   pwd
               shell: bash
@@ -36,5 +36,5 @@ jobs:
                   git config --global user.name 'gp201'
                   git config --global user.email 'gp201@users.noreply.github.com'
                   git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-                  git commit -am "Automated report"
+                  git commit -am "Update documentation"
                   git push
