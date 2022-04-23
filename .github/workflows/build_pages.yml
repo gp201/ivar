@@ -16,7 +16,7 @@ jobs:
                   pwd
                   wget https://github.com/doxygen/doxygen/archive/refs/tags/Release_1_8_14.tar.gz
                   tar -xzf Release_1_8_14.tar.gz
-                  cd Release_1_8_14
+                  cd doxygen-Release_1_8_14
                   mkdir build
                   cd build
                   cmake -G "Unix Makefiles" ..
