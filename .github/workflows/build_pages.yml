@@ -1,20 +1,17 @@
 name: Build pages using Doxygen
 on:
     workflow_dispatch:
-    pull_request:
-        branches:
-            - master
-        types:
-            - closed
-    push:
-        branches:    
-            - 'master'
-        paths:
-            - 'docs/'
+    # pull_request:
+    #     branches:
+    #         - master
+    #     types:
+    #         - closed
+    #     paths:
+    #         - 'docs/'
 
 jobs:
-    if_merged:
-      if: github.event.pull_request.merged == true
+    build_pages:
+        # if: github.event.pull_request.merged == true
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
@@ -44,8 +41,8 @@ jobs:
 
             - name: Commit to changes to branch
               run: |
-                  git config --global user.name 'gp201'
-                  git config --global user.email 'gp201@users.noreply.github.com'
+                  git config --global user.name '${GH_USERNAME}'
+                  git config --global user.email '${GH_USERNAME}@users.noreply.github.com'
                   git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
                   git commit -am "Update documentation"
                   git push
