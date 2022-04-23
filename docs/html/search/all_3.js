@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['manual',['Manual',['../manualpage.html',1,'']]]
+  ['manual_3',['Manual',['../manualpage.html',1,'']]]
 ];
