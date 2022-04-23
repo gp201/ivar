@@ -1,6 +1,11 @@
 name: Build pages using Doxygen
 on:
     workflow_dispatch:
+        inputs:
+            commitmsg:
+                description: 'Commit Message'
+                required: true
+                default: 'Update documentation'
     # pull_request:
     #     branches:
     #         - master
@@ -37,8 +42,8 @@ jobs:
 
             - name: Commit to changes to branch
               run: |
-                  git config --global user.name ${{ github.actor }}
+                  git config --global user.name '${{ github.actor }}'
                   git config --global user.email '${{ github.actor }}@users.noreply.github.com'
                   git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-                  git commit -am "Update documentation"
+                  git commit -am "${{ github.event.inputs.commitmsg }}"
                   git push
