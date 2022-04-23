@@ -164,7 +164,7 @@ Description
 
 ## Filter variants across replicates with iVar
 
-iVar can be used to get an intersection of variants(in .tsv files) called from any number of replicates or from different samples using the same reference sequence. This intersection will filter out any iSNVs that do not occur in a minimum fraction of the files supplied. This parameter can be changed using the `-t` flag which range from 0 to 1 (default). Fields that are different across replicates(fields apart from REGION, POS, REF, ALT, REF_CODON, REF_AA, ALT_CODON, ALT_AA) will have the filename added as a suffix. If there are a large number of files to be filtered, the `-f` flag can be used to supply a text file with one sample/replicate variant .tsv file per line.
+iVar can be used to get an intersection of variants(in .tsv files) called from any number of replicates or from different samples using the same reference sequence. This intersection will filter out any iSNVs that do not occur in a minimum fration of the files supplied. This parameter can be changed using the `-t` flag which range from 0 to 1 (default). Fields that are different across replicates(fields apart from REGION, POS, REF, ALT, REF_CODON, REF_AA, ALT_CODON, ALT_AA) will have the filename added as a suffix. If there are a large number of files to be filtered, the `-f` flag can be used to supply a text file with one sample/replicate variant .tsv file per line.
 
 Command:
 
