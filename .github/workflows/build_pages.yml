@@ -1,0 +1,36 @@
+name: Build pages using Doxygen
+on:
+    workflow_dispatch:
+
+jobs:
+    build-pages:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Install Doxygen
+              run: |
+                  cd ..
+                  wget https://github.com/doxygen/doxygen/archive/refs/tags/Release_1_8_14.tar.gz
+                  tar -xzf doxygen-Release_1_8_14.tar.gz
+                  cd doxygen-Release_1_8_14
+                  mkdir build
+                  cd build
+                  cmake -G "Unix Makefiles" ..
+                  make
+                  sudo make install
+                  cd ivar
+              shell: bash
+
+            - name: Build pages
+              run: doxygen Doxyfile
+              shell: bash
+
+            - name: Commit to changes to branch
+              run: |
+                  git config --global user.name 'gp201'
+                  git config --global user.email 'gp201@users.noreply.github.com'
+                  git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+                  git commit -am "Automated report"
+                  git push
